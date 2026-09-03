@@ -1,0 +1,43 @@
+import { DataTypes } from "sequelize";
+import sequelize from "../config/database.js"
+
+export const UserModel = sequelize.define("User",
+
+    {
+        id:{
+            type:DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement:true,
+        },
+        username:{
+            type:DataTypes.STRING(20),
+            allownull:false,
+            unique:true,
+            validate:{
+                len:[3,20]
+            }
+        },
+        email:{
+            type: DataTypes.STRING(100),
+            allownull:false,
+            unique:true,
+            validate:{
+                isEmail:true
+            }
+        },
+        password:{
+            type:DataTypes.STRING(255),
+            allownull:false
+        },
+        role:{
+            type:DataTypes.ENUM('user','admin')
+        }
+        
+    },{
+    timestamps: true,      
+    paranoid: true,      
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+    deletedAt: 'deleted_at'
+    }
+);
