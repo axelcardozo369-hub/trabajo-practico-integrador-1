@@ -12,7 +12,7 @@ export const ArticleTagModel = sequelize.define(
     },
     article_id: {
       type: DataTypes.INTEGER,
-      allownull: false,
+      allowNull: false,
       references: {
         model: "Articles",
         key: "id",
@@ -20,7 +20,7 @@ export const ArticleTagModel = sequelize.define(
     },
     tag_id: {
       type: DataTypes.INTEGER,
-      allownull: false,
+      allowNull: false,
       references: {
         model: "Tags",
         key: "id",

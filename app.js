@@ -6,6 +6,8 @@ import { TagModel } from "./src/models/tag.model.js";
 import { ArticleModel } from "./src/models/article.model.js";
 import { ArticleTagModel } from "./src/models/articleTag.model.js";
 import { userRouter } from "./src/routes/user.routes.js";
+import { tagRouter } from "./src/routes/tag.routes.js";
+import { profileRouter } from "./src/routes/profile.routes.js";
 
 dotenv.config();
 console.log("Puerto configurado:", process.env.PORT);
@@ -16,6 +18,8 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use("/api", userRouter);
+app.use("/api", tagRouter);
+app.use("/api", profileRouter);
 const conexionBaseDatos = async () => {
   try {
     await sequelize.sync({ force: true });

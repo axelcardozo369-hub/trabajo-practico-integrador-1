@@ -12,7 +12,7 @@ export const ProfileModel = sequelize.define(
     },
     user_id: {
       type: DataTypes.INTEGER,
-      allownull: false,
+      allowNull: false,
       unique: true,
       references: {
         model: "Users",
@@ -21,28 +21,28 @@ export const ProfileModel = sequelize.define(
     },
     first_name: {
       type: DataTypes.STRING(50),
-      allownull: false,
+      allowNull: false,
     },
     last_name: {
       type: DataTypes.STRING(50),
-      allownull: false,
+      allowNull: false,
     },
     biography: {
       type: DataTypes.TEXT,
-      allownull: true,
+     allowNull: true,
     },
     avatar_url: {
       type: DataTypes.STRING(255),
-      allownull: false,
+      allowNull: false,
     },
     birth_date: {
       type: DataTypes.DATE,
-      allownull: false,
+      allowNull: false,
     },
   },
   {
     timestamps: true,
-    createAt: "created_at",
-    updateAt: "update_at",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   },
 );

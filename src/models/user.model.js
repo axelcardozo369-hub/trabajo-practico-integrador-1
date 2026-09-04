@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
-import { ProfileModel } from "./profile.js";
+import { ProfileModel } from "./profile.model.js";
 import { ArticleModel } from "./article.model.js";
 
 export const UserModel = sequelize.define(
@@ -14,7 +14,7 @@ export const UserModel = sequelize.define(
     },
     username: {
       type: DataTypes.STRING(20),
-      allownull: false,
+      allowNull: false,
       unique: true,
       validate: {
         len: [3, 20],
@@ -22,7 +22,7 @@ export const UserModel = sequelize.define(
     },
     email: {
       type: DataTypes.STRING(100),
-      allownull: false,
+      allowNull: false,
       unique: true,
       validate: {
         isEmail: true,
@@ -30,7 +30,7 @@ export const UserModel = sequelize.define(
     },
     password: {
       type: DataTypes.STRING(255),
-      allownull: false,
+      allowNull: false,
     },
     role: {
       type: DataTypes.ENUM("user", "admin"),

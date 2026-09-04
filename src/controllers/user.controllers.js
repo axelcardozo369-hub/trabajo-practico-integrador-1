@@ -1,9 +1,11 @@
 import { matchedData, param, validationResult } from "express-validator";
 import { UserModel } from "../models/user.model.js";
+import { ProfileModel } from "../models/profile.model.js";
 export const agregateUser = async (req,res) => {
     try {
         const validationData = matchedData(req);
         const user = await UserModel.create(validationData)
+        console.log(validationData)
         return res.status(201).json({message:"user agregado"},user)
     } catch (error) {
         return res.status(500).json({message:'Error al poder agregar users',error:error.message})
@@ -24,7 +26,9 @@ export const eliminarUser = async (req,res) => {
 }
 export const verTodayUsers = async (req,res) => {
     try {
-        const user = await UserModel.findAll()
+        const user = await UserModel.findAll({
+            include:{model:ProfileModel, as:"profile",attributes:["first_name","last_name","biography","avatar_url"]}
+        })
         return res.status(200).json({message:"estos son todos los users",user})
     } catch (error) {
         return res.status(500).json({message:"Error al poder ver todos los  user"})
@@ -32,7 +36,7 @@ export const verTodayUsers = async (req,res) => {
 }
 export const verPorIduser = async (req,res) => {
     try {
-        const idUser = await UserModel.findByPk(req.params.id)
+        const idUser = await UserModel.findByPk(req.params.id,{include:{model:ProfileModel, as:"profile",attributes:["first_name","last_name","biography","avatar_url"]}})
         if (!idUser) {
             return res.status(404).json({message:"el user buscado no existe"})
         }

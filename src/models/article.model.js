@@ -10,14 +10,14 @@ export const ArticleModel = sequelize.define(
     },
     tittle: {
       type: DataTypes.STRING(200),
-      allownull: false,
+      allowNull: false,
       validate: {
         len: [3, 200],
       },
     },
     content: {
       type: DataTypes.TEXT,
-      allownull: false,
+      allowNull: false,
       validate: {
         len: [3, 200],
       },
@@ -28,11 +28,11 @@ export const ArticleModel = sequelize.define(
     status: {
       type: DataTypes.ENUM("published", "archived"),
       default: "published",
-      allownull: false,
+      allowNull: false,
     },
     user_id: {
       type: DataTypes.INTEGER,
-      allownull: false,
+      allowNull: false,
       references: {
         model: "Users",
         key: "id",
