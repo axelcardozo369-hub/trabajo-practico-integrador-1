@@ -8,7 +8,7 @@ export const ArticleModel = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    tittle: {
+    title: {
       type: DataTypes.STRING(200),
       allowNull: false,
       validate: {
@@ -27,7 +27,7 @@ export const ArticleModel = sequelize.define(
     },
     status: {
       type: DataTypes.ENUM("published", "archived"),
-      default: "published",
+      defaultValue: "published",
       allowNull: false,
     },
     user_id: {

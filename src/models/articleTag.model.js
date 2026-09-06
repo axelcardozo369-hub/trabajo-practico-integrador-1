@@ -17,6 +17,7 @@ export const ArticleTagModel = sequelize.define(
         model: "Articles",
         key: "id",
       },
+      onDelete: "CASCADE",
     },
     tag_id: {
       type: DataTypes.INTEGER,
@@ -25,11 +26,11 @@ export const ArticleTagModel = sequelize.define(
         model: "Tags",
         key: "id",
       },
+      onDelete: "CASCADE",
     },
   },
   {
     timestamps: true,
-    paranoid: true,
     createdAt: "created_at",
     updatedAt: "updated_at",
     deletedAt: "deleted_at",
@@ -39,11 +40,13 @@ export const ArticleTagModel = sequelize.define(
 ArticleModel.belongsToMany(TagModel, {
   foreignKey: "article_id",
   as: "tags",
+  onDelete: "CASCADE",
   through: ArticleTagModel,
 });
 
 TagModel.belongsToMany(ArticleModel, {
   foreignKey: "tag_id",
   as: "articles",
+  onDelete: "CASCADE",
   through: ArticleTagModel,
 });

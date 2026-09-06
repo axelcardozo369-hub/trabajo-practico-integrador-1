@@ -29,7 +29,7 @@ export const ProfileModel = sequelize.define(
     },
     biography: {
       type: DataTypes.TEXT,
-     allowNull: true,
+      allowNull: true,
     },
     avatar_url: {
       type: DataTypes.STRING(255),
