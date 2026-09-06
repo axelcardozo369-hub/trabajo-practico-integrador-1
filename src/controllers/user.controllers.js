@@ -2,12 +2,18 @@ import { matchedData, param, validationResult } from "express-validator";
 import { UserModel } from "../models/user.model.js";
 import { ProfileModel } from "../models/profile.model.js";
 import { ArticleModel } from "../models/article.model.js";
+import { hashPassword } from "../helpers/bcript.helper.js";
+
 export const agregateUser = async (req, res) => {
   try {
     const validationData = matchedData(req);
+    if (validationData.password) {
+      validationData.password = await hashPassword(validationData.password);
+    }
     const user = await UserModel.create(validationData);
+
     console.log(validationData);
-    return res.status(201).json({ message: "user agregado" }, user);
+    return res.status(201).json({ message: "user agregado con exito ", user });
   } catch (error) {
     return res
       .status(500)

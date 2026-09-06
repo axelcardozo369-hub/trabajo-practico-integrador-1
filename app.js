@@ -10,6 +10,7 @@ import { tagRouter } from "./src/routes/tag.routes.js";
 import { profileRouter } from "./src/routes/profile.routes.js";
 import { articleRouter } from "./src/routes/article.routes.js";
 import { articleTagRouter } from "./src/routes/articleTag.routes.js";
+import { authRouter } from "./src/routes/auth.routes.js";
 
 dotenv.config();
 console.log("Puerto configurado:", process.env.PORT);
@@ -24,6 +25,7 @@ app.use("/api", tagRouter);
 app.use("/api", profileRouter);
 app.use("/api", articleRouter);
 app.use("/api", articleTagRouter);
+app.use("/api", authRouter);
 const conexionBaseDatos = async () => {
   try {
     await sequelize.sync({ force: true });
