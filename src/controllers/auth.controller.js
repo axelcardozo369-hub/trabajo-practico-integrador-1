@@ -1,6 +1,6 @@
 import { matchedData } from "express-validator";
 import { UserModel } from "../models/user.model.js";
-import { comparePassword } from "../helpers/bcript.helper.js";
+import { comparePassword, hashPassword } from "../helpers/bcript.helper.js";
 import { generarToken } from "../helpers/jwt.helper.js";
 
 export const login = async (req, res) => {
@@ -22,7 +22,10 @@ export const login = async (req, res) => {
         .json({ message: "credenciales fueron incorrectas" });
     }
 
-    const token = generarToken({ userId: userExiste.id });
+    const token = generarToken({
+      userId: userExiste.id,
+      userRole: userExiste.role,
+    });
 
     return res
       .cookie("token", token, {
@@ -31,6 +34,29 @@ export const login = async (req, res) => {
       })
       .status(200)
       .json({ message: "login exitoso" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "error interno del servidor", error: error.message });
+  }
+};
+export const register = async (req, res) => {
+  try {
+    const { username, email, password } = matchedData(req, {
+      locations: ["body"],
+    });
+
+    const hasheoPassword = await hashPassword(password);
+
+    const newUser = await UserModel.create({
+      username,
+      email,
+      password: hasheoPassword,
+      role: "user",
+    });
+    return res
+      .status(201)
+      .json({ message: "user registrado con exito", newUser });
   } catch (error) {
     return res
       .status(500)

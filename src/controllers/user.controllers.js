@@ -6,11 +6,16 @@ import { hashPassword } from "../helpers/bcript.helper.js";
 
 export const agregateUser = async (req, res) => {
   try {
-    const validationData = matchedData(req);
+    const { username, email, password } = matchedData(req);
     if (validationData.password) {
       validationData.password = await hashPassword(validationData.password);
     }
-    const user = await UserModel.create(validationData);
+    const user = await UserModel.create({
+      username,
+      email,
+      password,
+      role: "user",
+    });
 
     console.log(validationData);
     return res.status(201).json({ message: "user agregado con exito ", user });

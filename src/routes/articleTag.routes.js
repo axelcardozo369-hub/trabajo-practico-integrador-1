@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   agregarArticleTag,
   deleteArticleTag,
+  todayArticleTag,
 } from "../controllers/articleTag.controllers.js";
 import { validate } from "../middleware/validate.js";
 import {
@@ -22,3 +23,4 @@ articleTagRouter.delete(
   validate,
   deleteArticleTag,
 );
+articleTagRouter.get("/articleTag", todayArticleTag);

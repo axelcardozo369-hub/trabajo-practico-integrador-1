@@ -57,13 +57,7 @@ export const verPorIdProfile = async (req, res) => {
           {
             model: ArticleModel,
             as: "Articles",
-            attributes: [
-              "first_name",
-              "last_name",
-              "biography",
-              "avatar_url",
-              "birth_date",
-            ],
+            attributes: ["title", "content", "excerpt", "status"],
           },
         ],
       },
@@ -91,7 +85,7 @@ export const todayProfiles = async (req, res) => {
       .status(200)
       .json({ message: "estos son todos los perfiles", profiles });
   } catch (error) {
-    return res.stat(500).json({
+    return res.status(500).json({
       message: "error al poder ver todos los perfiles",
       error: error.message,
     });
