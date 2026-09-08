@@ -2,7 +2,7 @@ import { body, param } from "express-validator";
 import { ArticleModel } from "../../models/article.model.js";
 import { UserModel } from "../../models/user.model.js";
 export const agregarArticleValidator = [
-  body("title").notEmpty().withMessage("el title no debe ser vacio").bail(),
+  body("title").notEmpty().withMessage("el title no debe ser vacio").bail().isLength({min:1,max:200}).withMessage("el title de tener al menos 3 y 200 caracteres"),
   body("content").notEmpty().withMessage("el content no debe ser vacio").bail(),
   body("excerpt").notEmpty().withMessage("el excerpt no debe ser vacio").bail(),
   body("status")

@@ -38,7 +38,7 @@ export const deleteArticleTagValidator = [
     .withMessage("el id debe ser un numero positivo")
     .bail()
     .custom(async (articleTagId) => {
-      const relacionExiste = await ArticleModel.findByPk(articleTagId);
+      const relacionExiste = await ArticleTagModel.findByPk(articleTagId);
       if (!relacionExiste) {
         throw new Error("la relacion entre article y tag no existe ");
       }
