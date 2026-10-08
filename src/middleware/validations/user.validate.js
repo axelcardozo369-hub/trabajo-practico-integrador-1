@@ -27,10 +27,10 @@ export const UserValidator = [
   body("password")
     .notEmpty()
     .withMessage("el password no debe ser vacia")
-    .bail(),
+    .bail().isLength({min:8}).withMessage("el password debe ser al menos 8 caracteres").bail(),
   body("role")
     .optional()
-    .isLength(["user", "admin"])
+    .isIn(["user", "admin"])
     .withMessage("El rol debe ser 'user' o 'admin'")
     .bail(),
 ];
@@ -78,7 +78,7 @@ export const updateUserValidator = [
     .bail()
     .custom(async (email) => {
       const emailExiste = await UserModel.findOne({ where: { email } });
-      if (!emailExiste) {
+      if (emailExiste) {
         throw new Error("el email que quiere registrar ya existe");
       }
       return true;
