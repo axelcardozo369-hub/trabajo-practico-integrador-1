@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import { sequelize } from "./src/config/database.js";
-
+import cors from "cors";
 import { TagModel } from "./src/models/tag.model.js";
 import { ArticleModel } from "./src/models/article.model.js";
 import { ArticleTagModel } from "./src/models/articleTag.model.js";
@@ -19,7 +19,12 @@ console.log("Base de datos:", process.env.DB_NAME);
 console.log("Usuario de DB:", process.env.DB_USER);
 const app = express();
 const PORT = 3000;
-
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", userRouter);

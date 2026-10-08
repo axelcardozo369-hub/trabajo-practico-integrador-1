@@ -28,6 +28,7 @@ export const UserModel = sequelize.define(
         isEmail: true,
       },
     },
+
     password: {
       type: DataTypes.STRING(255),
       allowNull: false,
